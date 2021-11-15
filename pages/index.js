@@ -1,192 +1,164 @@
-import Head from 'next/head'
-
 export default function Home() {
   return (
     <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <header className="header">Team Selector</header>
+
+      <side>
+        <ul>
+          <li>Dashboard</li>
+          <li>Players</li>
+          <li>Games</li>
+        </ul>
+      </side>
 
       <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <h1>Players</h1>
+        <h2>Best Players</h2>
+        <div className="best-players">
+          <div className="player">
+            <div className="name">
+              Nico T <span className="score">4.9</span>
+            </div>
+            <div className="country">Argentina</div>
+          </div>
+          <div className="player best">
+            <div className="name">
+              Bictor B <span className="score">5.0</span>
+            </div>
+            <div className="country">Argentina</div>
+          </div>
+          <div className="player">
+            <div className="name">
+              Pato M <span className="score">4.6</span>
+            </div>
+            <div className="country">Argentina</div>
+          </div>
         </div>
+
+        <h2>All Players</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Select</th>
+              <th>Name</th>
+              <th>Score</th>
+              <th>Country</th>
+              <th>Vote</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <input type="checkbox" />
+              </td>
+              <td>Nico T</td>
+              <td>4,9</td>
+              <td>Argentina</td>
+              <td>
+                <button>Button</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" />
+              </td>
+              <td>Nico T</td>
+              <td>4,9</td>
+              <td>Argentina</td>
+              <td>
+                <button>Button</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
+        <div>0/12 Selected</div>
+        <button>New Game</button>
       </footer>
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
+        main {
+          min-height: calc(100vh - 85px - 52px);
+          width: calc(100% - 262px);
           padding: 0 0.5rem;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
+          margin-left: 262px;
+          margin-top: 85px;
         }
 
-        main {
-          padding: 5rem 0;
-          flex: 1;
+        .best-players {
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          flex-direction: row;
+          align-content: space-between;
+          justify-content: space-between;
+          width: calc(100% - 16px);
+          margin-left: 16px;
+        }
+
+        .best-players .player {
+          width: 30%;
+          background: white;
+          border-radius: 4px;
+          padding: 8px;
+        }
+
+        .best-players .player.best {
+          background: linear-gradient(45deg, #7e57c2, #ab47bc);
+          color: white;
+        }
+
+        .best-players .player .name {
+          font-weight: bold;
+          line-height: 32px;
+        }
+
+        .player .name .score {
+          display: inline-box;
+          float: right;
+        }
+
+        .best-players .player .country {
+          border-top: 1px solid #ddd;
+          line-height: 24px;
+          font-size: 12px;
+        }
+
+        table {
+          width: calc(100% - 16px);
+          margin-left: 16px;
+          border: none;
+          border-spacing: 0 4px;
+          border-collapse: separate;
+        }
+
+        table th,
+        table td {
+          text-align: left;
+          line-height: 48px;
+        }
+
+        table tbody td {
+          background: white;
+          border: none;
         }
 
         footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
+          height: 52px;
+          line-height: 52px;
+          background: white;
           display: flex;
-          justify-content: center;
-          align-items: center;
+          flex-direction: row;
+          justify-content: flex-end;
+          padding-right: 16px;
         }
 
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
+        footer > div {
+          margin-right: 8px;
         }
       `}</style>
 
@@ -198,12 +170,82 @@ export default function Home() {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
+          background: #f6f8f9;
         }
 
         * {
           box-sizing: border-box;
         }
+
+        .header {
+          height: 85px;
+          width: 100%;
+          text-align: left;
+          background: white;
+          position: fixed;
+          top: 0;
+          font-size: 32px;
+          padding-left: 16px;
+          line-height: 85px;
+          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        side {
+          height: calc(100vh - 85px);
+          width: 262px;
+          background: rgba(255, 255, 255, 0.8);
+          position: fixed;
+          top: 84px;
+          left: 0;
+          border-top: 4px solid white;
+          box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        side ul {
+          list-style: none;
+          margin: 0;
+          padding: 16px;
+          font-size: 16px;
+        }
+
+        side ul li {
+          line-height: 28px;
+          cursor: pointer;
+          margin: 8px 0;
+        }
+
+        side ul li:hover {
+          font-weight: bold;
+        }
+
+        h1,
+        h2 {
+          font-size: 28px;
+          text-align: left;
+          margin: 0;
+          padding: 8px 16px;
+          width: 100%;
+        }
+
+        h2 {
+          font-size: 18px;
+        }
+
+        button {
+          background: #007bff;
+          color: white;
+          line-height: 24px;
+          font-size: 14px;
+          text-align: center;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background: #108bff;
+        }
       `}</style>
     </div>
-  )
+  );
 }
