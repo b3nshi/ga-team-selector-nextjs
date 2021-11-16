@@ -1,10 +1,11 @@
-import { crossover } from "./crossover.function";
+import { mutate } from "./mutate.function";
 
-describe("Test cross function", function () {
+describe("Test mutate function", function () {
   beforeEach(() => {
     jest
       .spyOn(global.Math, "random")
       .mockReturnValueOnce(0.2073777887129339)
+      .mockReturnValueOnce(0.3073777887129339)
       .mockReturnValueOnce(0.8073777887129339);
   });
 
@@ -16,9 +17,8 @@ describe("Test cross function", function () {
 
     const percentage = 0.5;
 
-    const newPopulation = crossover(population, percentage, 4);
-    expect(newPopulation[2]).toEqual([1, 3, 0, 2, 4, 5]);
-    expect(newPopulation[3]).toEqual([1, 3, 0, 4, 2, 5]);
+    const newPopulation = mutate(population, percentage, 4);
+    expect(newPopulation[2]).toEqual([5, 0, 2, 3, 4, 1]);
   });
 
   afterEach(() => {
