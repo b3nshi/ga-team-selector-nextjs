@@ -3,13 +3,13 @@ export default function Home() {
     <div className="container">
       <header className="header">Team Selector</header>
 
-      <side>
+      <aside>
         <ul>
           <li>Dashboard</li>
           <li>Players</li>
           <li>Games</li>
         </ul>
-      </side>
+      </aside>
 
       <main>
         <h1>Players</h1>
@@ -190,7 +190,7 @@ export default function Home() {
           box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         }
 
-        side {
+        aside {
           height: calc(100vh - 85px);
           width: 262px;
           background: rgba(255, 255, 255, 0.8);
@@ -201,20 +201,20 @@ export default function Home() {
           box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
         }
 
-        side ul {
+        aside ul {
           list-style: none;
           margin: 0;
           padding: 16px;
           font-size: 16px;
         }
 
-        side ul li {
+        aside ul li {
           line-height: 28px;
           cursor: pointer;
           margin: 8px 0;
         }
 
-        side ul li:hover {
+        aside ul li:hover {
           font-weight: bold;
         }
 
