@@ -2,8 +2,8 @@ import { calculateFitness } from "./fitness.function";
 
 it("should calculate the proper score", () => {
   const population = [
-    [2, 1, 3, 4, 5, 6],
-    [4, 2, 5, 1, 3, 6],
+    [1, 0, 2, 3, 4, 5],
+    [3, 1, 4, 0, 2, 5],
   ];
 
   const players = [3, 2, 5, 5, 4, 2];

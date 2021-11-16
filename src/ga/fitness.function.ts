@@ -1,6 +1,6 @@
 const calculateTeamScore =
   (players: number[]) => (acc: number, currentValue: number) =>
-    acc + players[currentValue - 1];
+    acc + players[currentValue];
 
 export const calculateFitness = (
   population: number[][],
