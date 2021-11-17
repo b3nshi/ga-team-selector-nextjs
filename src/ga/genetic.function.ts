@@ -1,12 +1,7 @@
+import { Player } from "../shared/interfaces";
 import { calculateFitness } from "./fitness.function";
 import { runGeneration } from "./generation.function";
 import { generateInitialPopulation } from "./initPopulation.function";
-
-export interface Player {
-  id: number;
-  name: string;
-  score: number;
-}
 
 export const runGenetic = (
   generations: number,

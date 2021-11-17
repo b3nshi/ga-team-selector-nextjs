@@ -1,4 +1,84 @@
+import React, { EventHandler, InputHTMLAttributes, useEffect, useState } from "react";
+import { Player } from "../shared/interfaces";
+
+const DEFAULT_PLAYERS_TEST: Player[] = [
+  {
+    id: 1,
+    name: "Benjamin",
+    score: 4.5,
+    totalVotes: 3,
+    country: "Argentina"
+  }
+];
+
+const DEFAULT_VOTE = "7";
+const LOCALSTORAGE_PLAYERS = "PLAYERS";
+
 export default function Home() {
+  const [playersList, setPlayersList] = useState<Player[]>([]);
+  const [inputVotesValues, setInputVotesValues] = useState<{[key: string]: string}>({});
+  const [newPlayer, setNewPlayer] = useState({
+    name: "",
+    score: "7",
+    country: "Argentina"
+  });
+
+  useEffect(() => {
+    setPlayersList(JSON.parse(window?.localStorage.getItem(LOCALSTORAGE_PLAYERS) || JSON.stringify(DEFAULT_PLAYERS_TEST) || "[]"));
+  }, []);
+
+  const votePlayer = (index: number) => {
+    return () => {
+      const newPlayersList: Player[] = JSON.parse(JSON.stringify(playersList));
+      const score = Math.round(((newPlayersList[index].score * newPlayersList[index].totalVotes) + Number(inputVotesValues[index])) / (newPlayersList[index].totalVotes + 1) * 10) / 10;
+      newPlayersList[index].score = score;
+      
+      newPlayersList[index].totalVotes += 1
+      setPlayersList(newPlayersList);
+      window?.localStorage.setItem(LOCALSTORAGE_PLAYERS, JSON.stringify(newPlayersList));
+    };
+  }
+  
+  const removePlayer = (indexToRemove: number) => {
+    return () => {
+      const newPlayersList: Player[] = JSON.parse(JSON.stringify(playersList));
+      newPlayersList.splice(indexToRemove, 1);
+      setPlayersList(newPlayersList);
+      window?.localStorage.setItem(LOCALSTORAGE_PLAYERS, JSON.stringify(newPlayersList));
+    };
+  }
+  
+  const addPlayer = () => {
+    if (newPlayer.name.length) {
+      const newPlayersList: Player[] = JSON.parse(JSON.stringify(playersList));
+
+      const player: Player = {
+        ...newPlayer,
+        id: newPlayersList[newPlayersList.length -1]?.id || 0 + 1,
+        score: Number(newPlayer.score),
+        totalVotes: 1
+      }
+
+      newPlayersList.push(player);
+      setPlayersList(newPlayersList);
+      window?.localStorage.setItem(LOCALSTORAGE_PLAYERS, JSON.stringify(newPlayersList));
+    }
+  }
+
+  const onChangeInputVoteNumber = (index: number) => (event) => {
+    setInputVotesValues({
+      ...inputVotesValues,
+      [index]: event.target.value
+    })
+  };
+  
+  const onChangeInput = (name: string) => (event) => {
+    setNewPlayer({
+      ...newPlayer,
+      [name]: event.target.value
+    })
+  };
+
   return (
     <div className="container">
       <header className="header">Team Selector</header>
@@ -47,35 +127,38 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr>
+          {playersList.map(({id, name, score, country}, index) => {
+            return (
+            <tr key={id}>
               <td>
                 <input type="checkbox" />
               </td>
-              <td>Nico T</td>
-              <td>4,9</td>
-              <td>Argentina</td>
+              <td>{name}</td>
+              <td>{score}</td>
+              <td>{country}</td>
               <td>
-                <button>Button</button>
+                <input type="number" min="1" max="10" onChange={onChangeInputVoteNumber(index)} value={inputVotesValues[index]|| DEFAULT_VOTE}/>
+                <button onClick={votePlayer(index)}>Vote</button>
+                <button className="btnRemove" onClick={removePlayer(index)}>Remove</button>
               </td>
             </tr>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>Nico T</td>
-              <td>4,9</td>
-              <td>Argentina</td>
-              <td>
-                <button>Button</button>
-              </td>
-            </tr>
+            )
+          })}
           </tbody>
         </table>
       </main>
 
       <footer>
-        <div>0/12 Selected</div>
-        <button>New Game</button>
+        <div className="newPlayer">
+          <input type="text" placeholder="Name" value={newPlayer.name} onChange={onChangeInput("name")}/>
+          <input type="text" placeholder="Country" value={newPlayer.country} onChange={onChangeInput("country")}/>
+          <input type="number" placeholder="Score" min="1" max="10" value={newPlayer.score} onChange={onChangeInput("score")}/>
+          <button onClick={addPlayer}>Add Player</button>
+        </div>
+        <div className="newGame">
+          <div className="selectedPlayers">0/12 Selected</div>
+          <button>New Game</button>
+        </div>
       </footer>
 
       <style jsx>{`
@@ -147,17 +230,36 @@ export default function Home() {
           border: none;
         }
 
+        .btnRemove {
+          margin-left: 8px;
+          background: #AA0000;
+        }
+
         footer {
           height: 52px;
+          width: calc(100% - 262px);
+          margin-left: 262px;
           line-height: 52px;
           background: white;
           display: flex;
           flex-direction: row;
-          justify-content: flex-end;
-          padding-right: 16px;
+          justify-content: space-between;
+          padding: 0 16px;
         }
 
-        footer > div {
+        
+        footer > .newPlayer {
+          flex: 2;
+        }
+        
+        footer > .newGame {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+        
+        footer div.selectedPlayers {
           margin-right: 8px;
         }
       `}</style>
@@ -238,12 +340,17 @@ export default function Home() {
           font-size: 14px;
           text-align: center;
           border: none;
-          border-radius: 4px;
           cursor: pointer;
+        }
+        
+        input {
+          line-height: 22px;
+          font-size: 14px;
+          border: 1px solid #CCC;
         }
 
         button:hover {
-          background: #108bff;
+          opacity: .9;
         }
       `}</style>
     </div>
