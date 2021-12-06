@@ -1,27 +1,22 @@
-import React, { EventHandler, InputHTMLAttributes, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Player } from "../shared/interfaces";
 
-const DEFAULT_PLAYERS_TEST: Player[] = [
-  {
-    id: 1,
-    name: "Benjamin",
-    score: 4.5,
-    totalVotes: 3,
-    country: "Argentina"
-  }
-];
+const DEFAULT_PLAYERS_TEST: Player[] = [];
 
 const DEFAULT_VOTE = "7";
 const LOCALSTORAGE_PLAYERS = "PLAYERS";
+const EMPTY_PLAYER = {
+  name: "",
+  score: "7",
+  country: "Argentina"
+} as const;
 
 export default function Home() {
   const [playersList, setPlayersList] = useState<Player[]>([]);
   const [inputVotesValues, setInputVotesValues] = useState<{[key: string]: string}>({});
-  const [newPlayer, setNewPlayer] = useState({
-    name: "",
-    score: "7",
-    country: "Argentina"
-  });
+  const [newPlayer, setNewPlayer] = useState({...EMPTY_PLAYER});
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
+  const [topPlayers, setTopPlayers] = useState([]);
 
   useEffect(() => {
     setPlayersList(JSON.parse(window?.localStorage.getItem(LOCALSTORAGE_PLAYERS) || JSON.stringify(DEFAULT_PLAYERS_TEST) || "[]"));
@@ -61,6 +56,7 @@ export default function Home() {
 
       newPlayersList.push(player);
       setPlayersList(newPlayersList);
+      setNewPlayer({...EMPTY_PLAYER});
       window?.localStorage.setItem(LOCALSTORAGE_PLAYERS, JSON.stringify(newPlayersList));
     }
   }
@@ -78,6 +74,39 @@ export default function Home() {
       [name]: event.target.value
     })
   };
+
+  const sortBy = (column: string, order: 'ASC' | 'DESC') => {
+    const sortedPlayers = [...playersList];
+    
+    sortedPlayers.sort((playerA: Player, playerB: Player) => {
+      if (order === 'DESC') {
+        return playerA[column] > playerB[column] ? -1 : 1;
+      } 
+      return playerA[column] > playerB[column] ? 1 : -1;
+    })
+    
+    return sortedPlayers;
+  }
+
+  const onTogglePlayer = (index: number) => (_evt) => {
+    const selectedIndex = selectedPlayers.indexOf(index);
+    const newSelected = [...selectedPlayers];
+    
+    if (selectedIndex === -1) {
+      newSelected.push(index);
+    } else {
+      newSelected.splice(selectedIndex, 1);
+    }
+
+    setSelectedPlayers(newSelected);
+  }
+
+  const isSelected = (index: number) => selectedPlayers.indexOf(index) !== -1;
+
+  useEffect(() => {
+    const sortedPlayers = sortBy("score", 'DESC');
+    setTopPlayers(sortedPlayers.slice(0, 3));
+  }, [playersList])
 
   return (
     <div className="container">
@@ -97,21 +126,21 @@ export default function Home() {
         <div className="best-players">
           <div className="player">
             <div className="name">
-              Nico T <span className="score">4.9</span>
+              {topPlayers[1]?.name} <span className="score">{topPlayers[1]?.score}</span>
             </div>
-            <div className="country">Argentina</div>
+            <div className="country">{topPlayers[1]?.country}</div>
           </div>
           <div className="player best">
             <div className="name">
-              Bictor B <span className="score">5.0</span>
+              {topPlayers[0]?.name} <span className="score">{topPlayers[0]?.score}</span>
             </div>
-            <div className="country">Argentina</div>
+            <div className="country">{topPlayers[0]?.country}</div>
           </div>
           <div className="player">
             <div className="name">
-              Pato M <span className="score">4.6</span>
+              {topPlayers[2]?.name} <span className="score">{topPlayers[2]?.score}</span>
             </div>
-            <div className="country">Argentina</div>
+            <div className="country">{topPlayers[2]?.country}</div>
           </div>
         </div>
 
@@ -129,9 +158,9 @@ export default function Home() {
           <tbody>
           {playersList.map(({id, name, score, country}, index) => {
             return (
-            <tr key={id}>
+            <tr key={name}>
               <td>
-                <input type="checkbox" />
+                <input type="checkbox" onChange={onTogglePlayer(index)} checked={isSelected(index)}/>
               </td>
               <td>{name}</td>
               <td>{score}</td>
@@ -156,8 +185,8 @@ export default function Home() {
           <button onClick={addPlayer}>Add Player</button>
         </div>
         <div className="newGame">
-          <div className="selectedPlayers">0/12 Selected</div>
-          <button>New Game</button>
+          <div className="selectedPlayers">{selectedPlayers.length}/{playersList.length} Selected</div>
+          <button disabled={(!selectedPlayers.length || selectedPlayers.length%2 !== 0)}>New Game</button>
         </div>
       </footer>
 
@@ -341,6 +370,12 @@ export default function Home() {
           text-align: center;
           border: none;
           cursor: pointer;
+        }
+        
+        button:disabled,
+        button[disabled] {
+          opacity: .8;
+          pointer-events: none;
         }
         
         input {
