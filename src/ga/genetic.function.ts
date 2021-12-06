@@ -3,6 +3,13 @@ import { calculateFitness } from "./fitness.function";
 import { runGeneration } from "./generation.function";
 import { generateInitialPopulation } from "./initPopulation.function";
 
+export interface GeneticResponse {
+  population: number[][];
+  scores: number[];
+  maxPossibleScore: number;
+  maxScore: number;
+}
+
 export const runGenetic = (
   generations: number,
   players: Player[],
@@ -11,7 +18,7 @@ export const runGenetic = (
   crossoverPercentage: number,
   mutationPercentage: number,
   printStats: boolean = false
-) => {
+): GeneticResponse => {
   const AVG_SCORES = [];
 
   const playersScores = players.map(({ score }) => score);

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Link from 'next/link'
 import { Player } from "../shared/interfaces";
-
-const DEFAULT_PLAYERS_TEST: Player[] = [];
+import { DEFAULT_PLAYERS_TEST, LOCALSTORAGE_PLAYERS } from "../constants";
 
 const DEFAULT_VOTE = "7";
-const LOCALSTORAGE_PLAYERS = "PLAYERS";
 const EMPTY_PLAYER = {
   name: "",
   score: "7",
@@ -115,8 +114,7 @@ export default function Home() {
       <aside>
         <ul>
           <li>Dashboard</li>
-          <li>Players</li>
-          <li>Games</li>
+          <li><Link href="/">Players</Link></li>
         </ul>
       </aside>
 
@@ -186,7 +184,13 @@ export default function Home() {
         </div>
         <div className="newGame">
           <div className="selectedPlayers">{selectedPlayers.length}/{playersList.length} Selected</div>
-          <button disabled={(!selectedPlayers.length || selectedPlayers.length%2 !== 0)}>New Game</button>
+          <button disabled={(!selectedPlayers.length || selectedPlayers.length%2 !== 0)}>
+            <Link href={{
+              pathname: `/games`,
+              query: {selected: selectedPlayers.join(",")}}}>
+              New Game
+            </Link>
+          </button>
         </div>
       </footer>
 
@@ -349,6 +353,11 @@ export default function Home() {
           font-weight: bold;
         }
 
+        aside ul a {
+          color: black;
+          text-decoration: none;
+        }
+
         h1,
         h2 {
           font-size: 28px;
@@ -369,6 +378,12 @@ export default function Home() {
           font-size: 14px;
           text-align: center;
           border: none;
+          cursor: pointer;
+        }
+        
+        button a {
+          color: white;
+          text-decoration: none;
           cursor: pointer;
         }
         
