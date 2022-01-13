@@ -1,0 +1,18 @@
+.wrapper {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: calc(100vh - 32px);
+  margin: auto;
+  margin-top: 16px;
+}
+
+.sideMenu {
+  width: 250px;
+  height: 100%;
+}
+
+.divisor {
+  color: #333;
+  width: 90%;
+}

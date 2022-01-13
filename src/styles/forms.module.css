@@ -1,0 +1,26 @@
+.field {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  color: var(--secondaryTextColor);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.field input {
+  line-height: 24px;
+  border: 1px solid #ccc;
+}
+
+.button {
+  line-height: 32px;
+  border: none;
+}
+
+.error {
+  color: red;
+}
+
+.toogleLegend {
+  text-align: center;
+}

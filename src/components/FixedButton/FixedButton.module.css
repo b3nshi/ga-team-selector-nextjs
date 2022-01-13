@@ -1,0 +1,8 @@
+.fixedButton {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  background: var(--primaryColor) !important;
+  border: none;
+  border-radius: 50%;
+}

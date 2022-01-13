@@ -1,0 +1,13 @@
+.signUpForm {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px;
+  margin: 100px auto 15px;
+  background: white;
+  border-radius: 5px;
+  width: 290px;
+  color: var(--secondaryTextColor);
+  font-size: 14px;
+}

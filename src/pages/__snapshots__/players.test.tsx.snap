@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div
+  className="jsx-330950375 container"
+>
+  <header
+    className="jsx-330950375 header"
+  >
+    Team Selector
+  </header>
+  <aside
+    className="jsx-330950375"
+  >
+    <ul
+      className="jsx-330950375"
+    >
+      <li
+        className="jsx-330950375"
+      >
+        Dashboard
+      </li>
+      <li
+        className="jsx-330950375"
+      >
+        Players
+      </li>
+      <li
+        className="jsx-330950375"
+      >
+        Games
+      </li>
+    </ul>
+  </aside>
+  <main
+    className="jsx-330950375"
+  >
+    <h1
+      className="jsx-330950375"
+    >
+      Players
+    </h1>
+    <h2
+      className="jsx-330950375"
+    >
+      Best Players
+    </h2>
+    <div
+      className="jsx-330950375 best-players"
+    >
+      <div
+        className="jsx-330950375 player"
+      >
+        <div
+          className="jsx-330950375 name"
+        >
+          Nico T 
+          <span
+            className="jsx-330950375 score"
+          >
+            4.9
+          </span>
+        </div>
+        <div
+          className="jsx-330950375 country"
+        >
+          Argentina
+        </div>
+      </div>
+      <div
+        className="jsx-330950375 player best"
+      >
+        <div
+          className="jsx-330950375 name"
+        >
+          Bictor B 
+          <span
+            className="jsx-330950375 score"
+          >
+            5.0
+          </span>
+        </div>
+        <div
+          className="jsx-330950375 country"
+        >
+          Argentina
+        </div>
+      </div>
+      <div
+        className="jsx-330950375 player"
+      >
+        <div
+          className="jsx-330950375 name"
+        >
+          Pato M 
+          <span
+            className="jsx-330950375 score"
+          >
+            4.6
+          </span>
+        </div>
+        <div
+          className="jsx-330950375 country"
+        >
+          Argentina
+        </div>
+      </div>
+    </div>
+    <h2
+      className="jsx-330950375"
+    >
+      All Players
+    </h2>
+    <table
+      className="jsx-330950375"
+    >
+      <thead
+        className="jsx-330950375"
+      >
+        <tr
+          className="jsx-330950375"
+        >
+          <th
+            className="jsx-330950375"
+          >
+            Select
+          </th>
+          <th
+            className="jsx-330950375"
+          >
+            Name
+          </th>
+          <th
+            className="jsx-330950375"
+          >
+            Score
+          </th>
+          <th
+            className="jsx-330950375"
+          >
+            Country
+          </th>
+          <th
+            className="jsx-330950375"
+          >
+            Vote
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        className="jsx-330950375"
+      >
+        <tr
+          className="jsx-330950375"
+        >
+          <td
+            className="jsx-330950375"
+          >
+            <input
+              className="jsx-330950375"
+              type="checkbox"
+            />
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            Nico T
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            4,9
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            Argentina
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            <button
+              className="jsx-330950375"
+            >
+              Button
+            </button>
+          </td>
+        </tr>
+        <tr
+          className="jsx-330950375"
+        >
+          <td
+            className="jsx-330950375"
+          >
+            <input
+              className="jsx-330950375"
+              type="checkbox"
+            />
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            Nico T
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            4,9
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            Argentina
+          </td>
+          <td
+            className="jsx-330950375"
+          >
+            <button
+              className="jsx-330950375"
+            >
+              Button
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <footer
+    className="jsx-330950375"
+  >
+    <div
+      className="jsx-330950375"
+    >
+      0/12 Selected
+    </div>
+    <button
+      className="jsx-330950375"
+    >
+      New Game
+    </button>
+  </footer>
+</div>
+`;
